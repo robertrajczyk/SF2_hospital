@@ -1,0 +1,27 @@
+{% extends "AcmeHappyBundle:Secured:layout.html.twig" %}
+
+ 
+{% block content %}
+ 
+	<div class="title_area_normal">{{ 'Szczegóły Sprzętu'|trans }} [{{ equipment.title }}] </div>
+	<hr>
+	
+	<div class="title_area_normal">{{ 'Awarie i Naprawy'|trans }}</div>
+
+	<div class="btn-group pull-right">
+        <a class="btn" href="{{ path('_admin_newequipmentbreakdown', {'id': id}) }}"><span class="fa fa-plus"></span> {{ "Nowa Awaria" |trans }}</a>
+    </div>
+		
+	{{ grid(gridBreakdowns, 'AcmeHappyBundle::grid.html.twig') }}
+	
+	<div class="title_area_normal">{{ 'Przeglądy Sprzętu'|trans }}</div>
+	
+	<div class="btn-group pull-right">
+        <a class="btn" href="{{ path('_admin_newequipmentreview', {'id': id}) }}"><span class="fa fa-plus"></span> {{ "Nowy Przegląd" |trans }}</a>
+    </div>
+	
+	{{ grid(gridReviews, 'AcmeHappyBundle::grid.html.twig') }}
+	
+{% endblock %}
+
+{% set code = code(_self) %}

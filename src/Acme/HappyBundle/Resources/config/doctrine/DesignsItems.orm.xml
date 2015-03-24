@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\DesignsItems" table="designs_items">
+    <indexes>
+      <index name="FK_C1FAC63ACD4F5A30" columns="design"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="true"/>
+    <field name="property" type="string" column="property" length="255" nullable="true"/>
+    <field name="extraprice" type="float" column="extraprice" precision="10" scale="0" nullable="true"/>
+    <many-to-one field="design" target-entity="Designs">
+      <join-columns>
+        <join-column name="design" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

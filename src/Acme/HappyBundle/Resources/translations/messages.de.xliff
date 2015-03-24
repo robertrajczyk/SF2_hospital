@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Design your Decor</source>
+                <target>Gestalten Sie Ihr Dekor</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Place an order</source>
+                <target>Legen Sie eine Bestellung</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Design Tree</source>
+                <target>Design Baum</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>Design Balloons</source>
+                <target>Design Balloons</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Gallery</source>
+                <target>Galerie</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>About Us</source>
+                <target>über uns</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Designs</source>
+                <target>Designs</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Orders</source>
+                <target>Bestellungen</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>Write some special needs</source>
+                <target>Schreiben Sie ein paar spezielle Anforderungen</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>Write Child Name</source>
+                <target>Schreiben Sie Kindernamen</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>child name</source>
+                <target>name</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Create User</source>
+                <target>Benutzer erstellen</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Proceed to order</source>
+                <target>Gehen Sie, um zu bestellen</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>You have to write your email!</source>
+                <target>Sie müssen Ihre E-Mail schreiben!</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Username must have @!</source>
+                <target>Benutzername muss über @!</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Email already exists</source>
+                <target>E-Mail ist bereits vorhanden</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Design saved</source>
+                <target>Design gespeichert</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Latest Designs</source>
+                <target>Neueste Designs</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>buy</source>
+                <target>kupię</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>exchange</source>
+                <target>zamienię</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>Comments</source>
+                <target>Komentarze</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Add comment</source>
+                <target>Dodaj komentarz</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Photo</source>
+                <target>Zdjęcie</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Vote</source>
+                <target>Głosuj</target>
+            </trans-unit> 
+            <trans-unit id="25">
+                <source>You have to write your username!</source>
+                <target>Musisz wpisać swoją nazwę użytkownika!</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Username can maximum be 30 characters!</source>
+                <target>Nazwa użytkownika może mieć maksymalnie 30 znaków!</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Username is not available!</source>
+                <target>Nazwa użytkownika nie jest dostępna!</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>You have to write your response!</source>
+                <target>Musisz napisać swoją odpowiedź</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Field can maximum be 500 characters!</source>
+                <target>Pole może posiadać maksymalnie 500 znaków</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Your Fill has been saved</source>
+                <target>Twoja odpowiedź została zapisana</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>You have to choose fill!</source>
+                <target>Musisz wybrać odpowiedź</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>Vote removed</source>
+                <target>Głos został cofnięty</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Vote added</source>
+                <target>Głos został dodany</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Not your fill!</source>
+                <target>Nie twoja odpowiedź</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>upvoted</source>
+                <target>głosowane</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>fills</source>
+                <target>odpowiedzi</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>blanks</source>
+                <target>pytania</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>This question already exists</source>
+                <target>Takie pytanie już istnieje</target>
+            </trans-unit>           
+			<trans-unit id="39">
+                <source>Next Photos</source>
+                <target>Następne Zdjęcia</target>
+            </trans-unit>
+			<trans-unit id="40">
+                <source>added by</source>
+                <target>dodane przez</target>
+            </trans-unit>
+			<trans-unit id="41">
+                <source>visits</source>
+                <target>wizyt</target>
+            </trans-unit>
+			<trans-unit id="42">
+                <source>votes</source>
+                <target>głosów</target>
+            </trans-unit> 
+			<trans-unit id="43">
+                <source>Attention! MiniWarGamers.com starts today</source>
+                <target>Uwaga! MiniWarGamers.com rusza dzisiaj</target>
+            </trans-unit> 
+			<trans-unit id="44">
+                <source>MiniWarGamers.com starts today</source>
+                <target>Z dniem dzisiejszym startują MiniWarGamers.com</target>
+            </trans-unit> 		
+			<trans-unit id="45">
+                <source>We are getting started with models exchange, turnamets and batraps. Happy rolls !</source>
+                <target>Ruszamy z giełdą modeli, zestawem turnieji i raportów bitewnych. Szczęśliwych rzutów !</target>
+            </trans-unit> 	
+			<trans-unit id="46">
+                <source>TURNAMENTS</source>
+                <target>TURNIEJE</target>
+            </trans-unit> 	
+			<trans-unit id="47">
+                <source>In your region hosts a number of tournaments</source>
+                <target>W twoim regionie odbywa się wiele turniejów</target>
+            </trans-unit> 	
+			<trans-unit id="48">
+                <source>Post info about them on MiniWarGamers.com</source>
+                <target>Zamieść info o nich na MiniWarGamers.com</target>
+            </trans-unit>
+			<trans-unit id="49">
+                <source>Tournament Information</source>
+                <target>Informacje o turniejach</target>
+            </trans-unit>
+
+			<trans-unit id="50">
+                <source>Add offer</source>
+                <target>Dodaj ogłoszenie</target>
+            </trans-unit>
+			<trans-unit id="51">
+                <source>Title</source>
+                <target>Tytuł</target>
+            </trans-unit>
+			<trans-unit id="52">
+                <source>Add type</source>
+                <target>Typ Ogłoszenia</target>
+            </trans-unit>
+			<trans-unit id="53">
+                <source>Army</source>
+                <target>Armia</target>
+            </trans-unit>
+			<trans-unit id="54">
+                <source>Description</source>
+                <target>Opis</target>
+            </trans-unit>
+			<trans-unit id="55">
+                <source>Price</source>
+                <target>Cena</target>
+            </trans-unit>
+			<trans-unit id="56">
+                <source>Photos</source>
+                <target>Zdjęcia</target>
+            </trans-unit>	 
+			<trans-unit id="57">
+                <source>Allow ratings</source>
+                <target>Pozwól na oceny</target>
+            </trans-unit>	
+			<trans-unit id="58">
+                <source>Allow comments</source>
+                <target>Pozwól na komentarze</target>
+            </trans-unit>	
+			<trans-unit id="59">
+                <source>Painting level</source>
+                <target>Poziom malowania</target>
+            </trans-unit>	
+			<trans-unit id="60">
+                <source>Add gallery</source>
+                <target>Dodaj galerie</target>
+            </trans-unit>	
+			<trans-unit id="61">
+                <source>gallery</source>
+                <target>galeria</target>
+            </trans-unit>	
+			<trans-unit id="62">
+                <source>Search</source>
+                <target>Szukaj</target>
+            </trans-unit>		
+			<trans-unit id="63">
+                <source>price</source>
+                <target>cena</target>
+            </trans-unit>				
+			<trans-unit id="64">
+                <source>Make offer</source>
+                <target>Zaproponuj</target>
+            </trans-unit>		
+			<trans-unit id="65">
+                <source>Currency</source>
+                <target>Waluta</target>
+            </trans-unit>				
+			<trans-unit id="66">
+                <source>To negotiate</source>
+                <target>Do negocjacji</target>
+            </trans-unit>				
+			<trans-unit id="67">
+                <source>Next Tournaments</source>
+                <target>Następne Turnieje</target>
+            </trans-unit>	
+			<trans-unit id="68">
+                <source>Turnaments</source>
+                <target>Turnieje</target>
+            </trans-unit> 				
+			<trans-unit id="69">
+                <source>Settings</source>
+                <target>Ustawienia</target>
+            </trans-unit> 	
+			<trans-unit id="70">
+                <source>Add turnament</source>
+                <target>Dodaj turniej</target>
+            </trans-unit> 	
+			<trans-unit id="71">
+                <source>Country</source>
+                <target>Kraj</target>
+            </trans-unit> 	
+			<trans-unit id="72">
+                <source>City</source>
+                <target>Miasto</target>
+            </trans-unit> 	
+			<trans-unit id="73">
+                <source>Address</source>
+                <target>Adres</target>
+            </trans-unit> 
+			<trans-unit id="74">
+                <source>Send message</source>
+                <target>Wyślij wiadomość</target>
+            </trans-unit> 	
+			<trans-unit id="75">
+                <source>Message has been sent</source>
+                <target>Wiadomość została wysłana</target>
+            </trans-unit> 	
+			<trans-unit id="76">
+                <source>Offer has been sent</source>
+                <target>Oferta została wysłana</target>
+            </trans-unit> 	
+			<trans-unit id="77">
+                <source>Comment has been added</source>
+                <target>Komentarz został dodany</target>
+            </trans-unit> 
+			<trans-unit id="78">
+                <source>average</source>
+                <target>średnio</target>
+            </trans-unit> 
+			<trans-unit id="79">
+                <source>level</source>
+                <target>poziom</target>
+            </trans-unit> 	
+			<trans-unit id="80">
+                <source>photos</source>
+                <target>zdjęcia</target>
+            </trans-unit> 	
+			<trans-unit id="81">
+                <source>photo comments</source>
+                <target>komentarze zdjęć</target>
+            </trans-unit> 	
+			<trans-unit id="82">
+                <source>batrap comments</source>
+                <target>komentarze raportów bitewnych</target>
+            </trans-unit> 	
+			<trans-unit id="83">
+                <source>models for sell</source>
+                <target>sprzedam</target>
+            </trans-unit> 	
+			<trans-unit id="84">
+                <source>offers buy</source>
+                <target>kupię</target>
+            </trans-unit> 	
+			<trans-unit id="85">
+                <source>messages recived</source>
+                <target>wiadomści otrzymane</target>
+            </trans-unit> 		
+			<trans-unit id="86">
+                <source>messages send</source>
+                <target>wiadomści wysyłane</target>
+            </trans-unit> 					
+			<trans-unit id="87">
+                <source>We recommend</source>
+                <target>Polecamy</target>
+            </trans-unit> 							 
+			<trans-unit id="88">
+                <source>Activate Your Account</source>
+                <target>Aktywuj swoje konto</target>
+            </trans-unit> 		
+			<trans-unit id="89">
+                <source>Registration Completed Correctly</source>
+                <target>Rejestracja przebiegła poprawnie</target>
+            </trans-unit> 	
+			<trans-unit id="90">
+                <source>For The Account to Work Properly The Account Must Be Activated</source>
+                <target>Aby twoje konto działało prawidłowo należy je aktywować</target>
+            </trans-unit> 		
+			<trans-unit id="91">
+                <source>The Activation Link Has Been Sent to Your E-mail</source>
+                <target>Link aktywacyjny został wysłany na podany e-mail</target>
+            </trans-unit> 	
+			<trans-unit id="92">
+                <source>If you do not receive an E-mail within 24 hours</source>
+                <target>Jeśli nie otrzymasz maila w ciągu 24 godzin</target>
+            </trans-unit> 	
+			<trans-unit id="93">
+                <source>Please check the SPAM folder or contact the monter {a} miniwargamers {dot} com</source>
+                <target>Prosimy sprawdź SPAM forlder, lub skontaktować się bezpośrednio z monter {a} miniwargamers {dot} com</target>
+            </trans-unit> 	
+			<trans-unit id="94">
+                <source>Register with Facebook</source>
+                <target>Zarejestruj przez Facebook</target>
+            </trans-unit> 	
+			<trans-unit id="95">
+                <source>Register WarGamer</source>
+                <target>Zarejestruj Gracza</target>
+            </trans-unit> 	
+			<trans-unit id="96">
+                <source>Username</source>
+                <target>Nazwa użytkownika</target>
+            </trans-unit> 	
+			<trans-unit id="97">
+                <source>Password</source>
+                <target>Hasło</target>
+            </trans-unit> 	
+			<trans-unit id="98">
+                <source>Retype Password</source>
+                <target>Ponownie Hasło</target>
+            </trans-unit> 	
+			<trans-unit id="99">
+                <source>REGISTER</source>
+                <target>ZAREJESTRUJ</target>
+            </trans-unit> 	
+			<trans-unit id="100">
+                <source>To active your account, please click link bellow</source>
+                <target>Aby aktywować swoje konto, proszę nacisnąć link poniżej</target>
+            </trans-unit> 	
+			<trans-unit id="101">
+                <source>Hello</source>
+                <target>Witamy</target>
+            </trans-unit> 	
+			<trans-unit id="102">
+                <source>Account Activation</source>
+                <target>Aktywacja Konta</target>
+            </trans-unit> 	
+			<trans-unit id="103">
+                <source>Wargamer Account is now Active</source>
+                <target>Konto MiniWarGamer`a zostało aktywowane</target>
+            </trans-unit> 	
+			<trans-unit id="104">
+                <source>Wrong hash code</source>
+                <target>Błędny kod weryfikacyjny</target>
+            </trans-unit> 
+			<trans-unit id="105">
+                <source>Standard Login</source>
+                <target>Zaloguj</target>
+            </trans-unit> 			
+			  
+        </body>
+    </file>
+</xliff>   

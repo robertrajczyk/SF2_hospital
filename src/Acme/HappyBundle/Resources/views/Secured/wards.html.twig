@@ -1,0 +1,18 @@
+{% extends "AcmeHappyBundle:Secured:layout.html.twig" %}
+
+ 
+{% block content %}
+
+	{% if is_granted('ROLE_ADMIN') %}
+		<div class="btn-group pull-right">
+            <a class="btn" href="#" onclick="return {{ grid.hash }}_show_filter()"><span class="fa fa-search"></span> {{ "Szukaj" |trans }}</a>
+            <a class="btn" href="{{ path('_admin_newward') }}"><span class="fa fa-plus"></span> {{ "Nowy Oddział" |trans }}</a>
+        </div>
+	{% endif %}
+	
+	    <div class="title_area_normal">{{ 'Oddziały'|trans }}</div>
+
+	{{ grid(grid, 'AcmeHappyBundle::grid.html.twig') }}
+{% endblock %}
+
+{% set code = code(_self) %}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\PaymentToken" table="payment_token">
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="details" type="text" column="details" nullable="true"/>
+    <field name="afterUrl" type="string" column="after_url" length="255" nullable="true"/>
+    <field name="targetUrl" type="string" column="target_url" length="255" nullable="true"/>
+    <field name="paymentName" type="string" column="payment_name" length="255" nullable="true"/>
+    <field name="hash" type="string" column="hash" length="255" nullable="true"/>
+  </entity>
+</doctrine-mapping>

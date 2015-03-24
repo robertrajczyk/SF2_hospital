@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\EquipmentReviews" table="equipment_reviews">
+    <indexes>
+      <index name="FK_eq_rew" columns="equipment"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="employee" type="string" column="employee" length="255" nullable="false"/>
+    <field name="reviewdate" type="date" column="reviewdate" nullable="false"/>
+    <field name="description" type="text" column="description" nullable="true"/>
+    <many-to-one field="equipment" target-entity="Equipments">
+      <join-columns>
+        <join-column name="equipment" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

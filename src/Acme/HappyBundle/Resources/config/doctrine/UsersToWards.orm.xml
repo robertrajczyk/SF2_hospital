@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\UsersToWards" table="users_to_wards">
+    <indexes>
+      <index name="FK_u_w" columns="userid"/>
+      <index name="FK_u_w2" columns="wardid"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="wardid" target-entity="Wards">
+      <join-columns>
+        <join-column name="wardid" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="userid" target-entity="Users">
+      <join-columns>
+        <join-column name="userid" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

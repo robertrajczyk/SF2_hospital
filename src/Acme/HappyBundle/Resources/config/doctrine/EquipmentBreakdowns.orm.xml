@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\EquipmentBreakdowns" table="equipment_breakdowns">
+    <indexes>
+      <index name="FK_e_b" columns="equipment"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="dateOfAccident" type="date" column="date_of_accident" nullable="true"/>
+    <field name="descriptionDamage" type="text" column="description_damage" nullable="true"/>
+    <field name="dateOfDispatch" type="date" column="date_of_dispatch" nullable="true"/>
+    <field name="dataRecovery" type="date" column="data_recovery" nullable="true"/>
+    <field name="serviceData" type="string" column="service_data" length="255" nullable="true"/>
+    <field name="warranty" type="string" column="warranty" length="255" nullable="true"/>
+    <field name="costs" type="string" column="costs" length="255" nullable="true"/>
+    <field name="comments" type="text" column="comments" nullable="true"/>
+    <many-to-one field="equipment" target-entity="Equipments">
+      <join-columns>
+        <join-column name="equipment" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

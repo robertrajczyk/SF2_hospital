@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Acme\HappyBundle\Entity\Equipments" table="equipments">
+    <indexes>
+      <index name="FK_eq_w" columns="wardid"/>
+    </indexes>
+    <id name="id" type="bigint" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="title" type="string" column="title" length="500" nullable="true"/>
+    <field name="producer" type="string" column="producer" length="500" nullable="true"/>
+    <field name="typ" type="string" column="typ" length="255" nullable="true"/>
+    <field name="numbersr" type="string" column="numbersr" length="255" nullable="true"/>
+    <field name="numberinw" type="string" column="numberinw" length="255" nullable="true"/>
+    <field name="dateofreview" type="datetime" column="dateofreview" nullable="true"/>
+    <field name="inserteduser" type="bigint" column="inserteduser" nullable="true"/>
+    <field name="inserteddate" type="datetime" column="inserteddate" nullable="true"/>
+    <many-to-one field="wardid" target-entity="Wards">
+      <join-columns>
+        <join-column name="wardid" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

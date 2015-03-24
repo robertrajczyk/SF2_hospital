@@ -1,0 +1,8 @@
+homepage:
+    pattern:   /
+    defaults:  { _controller: AcmeHappyBundle:Secured:login }
+
+acme_happy:
+    resource: "@AcmeHappyBundle/Controller/"
+    type:     annotation
+    prefix:   /

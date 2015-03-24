@@ -1,0 +1,128 @@
+{% extends "AcmeHappyBundle:Secured:layout.html.twig" %}
+
+{% block content %}
+
+<div class="grid">
+<table>
+	<tr> 
+		<td width="50%">
+			<div class="title_area_normal">{{ "Edycja Użytkownika" |trans }}</div>
+	 
+			<form  id="contact_form" action="#" method="post" {{ form_enctype(form) }}>
+				{{ form_errors(form) }}
+		   
+				 <div class="half left text-right">
+					<label class="required" for="contact_email">{{ "Login" |trans }}</label>
+				</div>
+				<div class="half left">
+					{{ form_widget(form.username) }}
+				</div>
+				 
+				 <div class="half left text-right">
+					<label class="required" for="contact_email">{{ "Hasło" |trans }}</label>
+				</div>
+				<div class="half left">
+					{{ form_widget(form.pass) }}
+				</div>
+				
+				 <div class="half left text-right">
+					<label class="required" for="contact_email">{{ "Aktywny" |trans }}</label>
+				</div>
+				<div class="half left">
+					{{ form_widget(form.active) }}
+				</div>
+				
+				<div class="clear"></div>
+
+				{{ form_row(form._token) }} 
+				<div class="clear"></div>
+				
+				<div class="text-center">
+					<button type="submit" class="sf-button">
+						<span class="border-l">
+							<span class="border-r">
+								<span class="btn-bg"> {{ "Zmień" |trans }}</span>
+							</span>
+						</span>
+					</button>
+				</div>
+				
+			</form>
+		</td>
+		<td width="50%">
+		
+			<div class="title_area_normal">{{ "Dodaj Użytkownika do Oddziału" |trans }}</div>
+			
+			<form  id="login" action="#" method="post" {{ form_enctype(usertowardForm) }}>
+				{{ form_errors(usertowardForm) }}
+		   
+				 <div class="half left text-right">
+					<label class="required" for="contact_email">{{ "Oddział" |trans }}</label>
+				</div>
+				<div class="half left">
+					{{ form_widget(usertowardForm.wardid) }}
+				</div>
+				 
+				
+				 <div class="half left text-right">
+					 
+				</div> 
+				
+				<div class="clear"></div>
+
+				{{ form_row(usertowardForm._token) }} 
+				<div class="clear"></div>
+				
+				<div class="text-center">
+					<button type="submit" class="sf-button">
+						<span class="border-l">
+							<span class="border-r">
+								<span class="btn-bg">{{ "Dodaj" |trans }}</span>
+							</span>
+						</span>
+					</button>
+				</div>
+				
+			</form>
+		</td>
+	</tr>
+</table>
+</div>
+
+<div class="title_area_normal">{{ "Użytkownik w oddziałach" |trans }}</div>
+
+	<div class="grid">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr class="grid-row-titles">
+				 
+				<th class="">
+					{{ "Oddział" |trans }} 
+				</th>
+				 
+				<th class=" last-column" style="width:100px;">
+					{{ "Opcje" |trans }} 
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for utw in usertoward %}   
+				<tr class="grid-row-cells even"> 
+					<td class="grid-column-username"> 
+						{{ utw.wardid.wardname }}
+					</td>
+					<td class="grid-column-__actions last-column">
+						<span class="btn-group pull-right"> 
+							<a class="btn btn-mini" title="{{ "Wypisz" |trans }} " onclick="return confirm('Czy na pewno chcesz wypisać?')" target="_self" href="/pl/admin/removeuserfromward/{{ utw.id }}"> {{ "Wypisz" |trans }}  </a>
+						</span>
+					</td>
+				</tr>
+			{% endfor %} 
+	
+			
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+
+{% set code = code(_self) %}

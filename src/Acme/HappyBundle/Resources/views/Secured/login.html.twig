@@ -1,0 +1,44 @@
+{% extends 'AcmeHappyBundle::layout.html.twig' %}
+
+{% block content %}
+    <div class="title_area_normal">{{ 'Logowanie'|trans }}</div>
+
+
+    {% if error %}
+        <div class="error">{{ error.message }}</div>
+    {% endif %}
+
+    <form action="{{ path("_security_check") }}" method="post" id="login">
+        <div class="half left text-right">
+            <label for="username">{{ 'Użytkownik'|trans }}</label>
+        </div>
+		<div class="half left">
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
+		
+		<div class="clear"></div>
+		
+        <div class="half left text-right">
+            <label for="password">{{ 'Hasło'|trans }}</label>
+        </div>
+		
+
+        <div class="half left">
+            <input type="password" id="password" name="_password" />
+        </div>
+		
+		<div class="clear"></div>
+		
+		<div class="text-center top20">
+			<button type="submit" class="sf-button">
+				<span class="border-l">
+					<span class="border-r">
+						<span class="btn-bg">{{ 'Zaloguj'|trans }}</span>
+					</span>
+				</span>
+			</button>
+		</div>
+    </form>
+{% endblock %}
+
+{% set code = code(_self) %}

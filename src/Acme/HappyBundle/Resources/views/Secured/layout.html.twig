@@ -1,0 +1,21 @@
+{% extends "AcmeHappyBundle::layout.html.twig" %}
+{% block content_top_text %}
+	logged in as  {{ app.user ? app.user.username : 'Anonymous' }}
+{% endblock %}
+{% block content_header_more %}
+	
+	{% if is_granted('ROLE_ADMIN') %}
+		<li><a href="{{ path('_admin_users') }}">{{ 'Użytkownicy'|trans }}</a></li> 
+	{% endif %}
+	
+	<li class="space"></li>
+								
+	<li><a href="{{ path('_admin_wards') }}">{{ 'Oddziały'|trans }}</a></li> 
+	
+	<li class="space"></li>
+	
+	<li><a href="{{ path('_admin_equipments') }}">{{ 'Sprzęt'|trans }}</a></li>  
+	
+	<li class="space"></li> 
+    <li><a href="{{ path('_demo_logout') }}">{{ 'Wyloguj'|trans }}</a></li>
+{% endblock %}

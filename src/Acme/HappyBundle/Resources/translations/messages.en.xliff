@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Tree</source>
+                <target>Trees</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Discover</source>
+                <target>Discover</target>
+            </trans-unit>
+	        <trans-unit id="3">
+                <source>Contact</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>About</source>
+                <target>About</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>Login</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Logout</source>
+                <target>Logout</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Sign Up</source>
+                <target>Sign Up</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Votes</source>
+                <target>Votes</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>First</source>
+                <target>First</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>New</source>
+                <target>New</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Share</source>
+                <target>Share</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Permalink</source>
+                <target>Permalink</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Report</source>
+                <target>Report</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>Delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>ago</source>
+                <target>ago</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>Start a Fill In The Blank</source>
+                <target>Start a Fill In The Blank</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>Upload image (optional)</source>
+                <target>Upload image (optional)</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>Write your Blank. Use _ (underscore) to insert Blank</source>
+                <target>Write your Blank. Use _ (underscore) to insert Blank</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>Preview</source>
+                <target>Preview</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>Re-Blank Picture</source>
+                <target>Re-Blank Picture</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>FILL IN THE BLANK</source>
+                <target>FILL IN THE BLANK</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>Login with</source>
+                <target>Login with</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>Sign up with</source>
+                <target>Sign up with</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>Thank you</source>
+                <target>Thank you</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>You have to write your username!</source>
+                <target>You have to write your username!</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>Username can maximum be 30 characters!</source>
+                <target>Username can maximum be 30 characters!</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>Username is not available!</source>
+                <target>Username is not available!</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>You have to write your response!</source>
+                <target>You have to write your response!</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Field can maximum be 500 characters!</source>
+                <target>Field can maximum be 500 characters!</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Your Fill has been saved</source>
+                <target>Your Fill has been saved</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>You have to choose fill!</source>
+                <target>You have to choose fill!</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>Vote removed</source>
+                <target>Vote removed</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>Vote added</source>
+                <target>Vote added</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>Not your fill!</source>
+                <target>Not your fill!</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>upvoted</source>
+                <target>upvoted</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>fills</source>
+                <target>fills</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>blanks</source>
+                <target>blanks</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>This question already exists</source>
+                <target>This question already exists</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>   

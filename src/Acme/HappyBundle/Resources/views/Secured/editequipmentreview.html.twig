@@ -1,0 +1,51 @@
+{% extends "AcmeHappyBundle:Secured:layout.html.twig" %}
+
+{% block content %}
+	<div class="title_area_normal">{{ "Edycja Przegląd Sprzętu" |trans }}</div>
+ 
+	<form  id="contact_form" action="#" method="post" {{ form_enctype(form) }}>
+        {{ form_errors(form) }}
+   
+		 <div class="half left text-right">
+            <label class="required" for="contact_email">{{ "Pracownik" |trans }}</label>
+        </div>
+		<div class="half left">
+            {{ form_widget(form.employee) }}
+        </div>
+		 
+		 <div class="half left text-right">
+            <label class="required" for="contact_email">{{ "Data" |trans }}</label>
+        </div>
+		<div class="half left">
+            {{ form_widget(form.reviewdate) }}
+        </div>
+		
+		 <div class="half left text-right">
+            <label class="required" for="contact_email">{{ "Opis" |trans }}</label>
+        </div>
+		<div class="half left">
+            {{ form_widget(form.description) }}
+        </div>
+		  
+		
+		<div class="clear"></div>
+
+        {{ form_row(form._token) }}
+		{{ form_rest(form) }}
+		<div class="clear"></div>
+		
+		<div class="text-center">
+			<button type="submit" class="sf-button">
+				<span class="border-l">
+					<span class="border-r">
+						<span class="btn-bg">{{ "Zmień" |trans }}</span>
+					</span>
+				</span>
+			</button>
+		</div>
+		
+    </form>
+	
+{% endblock %}
+
+{% set code = code(_self) %}

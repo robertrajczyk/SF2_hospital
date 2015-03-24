@@ -1,0 +1,37 @@
+security:
+    encoders:
+        Acme\HappyBundle\Entity\Users:
+            algorithm: sha512
+            encode-as-base64: true
+            iterations: 10
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        main:
+            entity: { class: Acme\HappyBundle\Entity\Users, property: username }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern:  ^/pl/admin/login$
+            security: false
+
+        secured_area:
+            form_login:
+                check_path: _security_check
+                login_path: _demo_login
+                success_handler: login_success_handler
+            logout:
+                path:   _demo_logout
+                target: /pl/admin/login
+            anonymous: ~
+
+    access_control:
+        - { path: ^/$, roles: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/pl/admin, roles: ROLE_ADMIN }
+        - { path: ^/pl/account, roles: ROLE_USER }
+        - { path: ^/pl/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

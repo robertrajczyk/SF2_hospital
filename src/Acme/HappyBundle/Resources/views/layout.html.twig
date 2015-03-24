@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="robots" content="noindex,nofollow" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0;">
+		
+        <title>POLSKA GRUPA MEDYCZNA Sp. z o.o.</title>
+        <link href="{{ asset('bundles/framework/css/structure.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ asset('bundles/framework/css/body.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon_new.ico') }}" />
+		<link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
+		<link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/colorbox.css') }}" type="text/css"/>
+		 
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.0.6-development-only.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/jquery.ddslick.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/color.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/html2canvas.js') }}"></script>
+		 <script type="text/javascript" src="{{ asset('bundles/acmedemo/js/jquery.jsPlumb-1.6.4.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/jquery.als-1.7.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/jquery.colorbox.js') }}"></script> 
+		<script type="text/javascript" src="{{ asset('bundles/acmedemo/js/imagelightbox.min.js') }}"></script> 
+		 
+		 
+    </head>
+    <body>
+		<div id="top_content">
+			<div class="content">
+				<div class="header clear-fix">
+					<div class="header-logo">
+						<a href="/"><img src="{{ asset('bundles/acmedemo/images/logo3.jpg') }}" height="90" alt="Symfony" /></a>
+					</div>
+					<div class="header-title">
+						POLSKA GRUPA MEDYCZNA Sp. z o.o. 
+						<div class="small-header-title">Naprawy Aparatury Medycznej</div>
+					</div>
+					
+					 <div id="top_flags">
+						<a href="/lang/en"><img src="{{ asset('bundles/acmedemo/images/flags/poland.png') }}"   alt="pl" /></a>
+						<!--
+							<a href="/lang/en"><img src="{{ asset('bundles/acmedemo/images/flags/england.png') }}"   alt="en" /></a>
+							<a href="/lang/de"><img src="{{ asset('bundles/acmedemo/images/flags/germany2.png') }}"   alt="de" /></a>
+						-->
+					</div>
+					 
+				</div>
+			</div>
+		</div>
+		<div class="top_menu">
+			<div class="content_menu">
+				 
+				<div class="right">
+					<div class="sf-reset">
+						{% block content_header %}
+							<ul id="menu">
+								{% block content_header_more %}
+									{% if app.user %} 
+											<li class="space"></li>
+																		
+											<li><a href="{{ path('_admin_wards') }}">{{ 'Oddziały'|trans }}</a></li> 
+											
+											<li class="space"></li>
+											
+											<li><a href="{{ path('_admin_equipments') }}">{{ 'Sprzęt'|trans }}</a></li>  
+											
+											<li class="space"></li>
+											
+											<li><a href="{{ path('_demo_logout') }}">{{ 'Wyloguj'|trans }}</a></li>
+								 
+									{% else %}
+										<li><a href="{{ path('_demo_login') }}">{{ 'Logowanie'|trans }}</a></li>
+									{% endif %}
+								 
+								{% endblock %}
+							</ul>
+
+							<div class="clear"></div>
+						{% endblock %} 
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="content_margin">
+        <div id="content">
+           
+			<div class="content_title">
+				
+			</div>
+            <div class="">
+			
+				{% for flashMessage in app.session.flashbag.get('error') %}
+					<div class="flash-message">
+						<em>Error</em>: {{ flashMessage }}
+					</div>
+				{% endfor %}
+				
+				{% for flashMessage in app.session.flashbag.get('success') %}
+					<div class="flash-message">
+						<em>Success</em>: {{ flashMessage }}
+					</div>
+				{% endfor %}
+				
+				{% for flashMessage in app.session.flashbag.get('notice') %}
+					<div class="flash-message">
+						<em>Notice</em>: {{ flashMessage }}
+					</div>
+				{% endfor %}
+ 
+				<div class="block">
+					{% block content %}{% endblock %}
+				</div>
+				
+			 
+            </div>
+        </div>
+		</div>
+		<div class="clear"></div>
+		
+		<div class="footer-bottom">
+		 
+			<div class="left" style="width:100%">
+				<center>Copyright 2015 POLSKA GRUPA MEDYCZNA Sp. z o.o. All Rights Reserved.</center>
+			</div>
+		</div>
+		 
+    </body>
+</html>
