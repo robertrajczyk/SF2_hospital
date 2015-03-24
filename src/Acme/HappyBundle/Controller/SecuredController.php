@@ -52,7 +52,7 @@ class SecuredController extends Controller
     { 
         return array(  );
     }
-	
+    
     /**
      * @Route("/users/", name="_admin_users")
      * @Template()
@@ -60,72 +60,72 @@ class SecuredController extends Controller
     public function usersAction(Request $request)
     {
         $source = new Entity('AcmeHappyBundle:Users');
-		
-		$wardColumn = new TextColumn(array('id' => 'lang',  'sortable' => false,'title' => '', 'size' => '80','filter' => false));
+        
+        $wardColumn = new TextColumn(array('id' => 'lang',  'sortable' => false,'title' => '', 'size' => '80','filter' => false));
 
         $grid = $this->get('grid');
-		
-		$grid->addColumn($wardColumn, 12);
-		 
-        $em = $this->getDoctrine()->getManager();		
-		 
-		$source->manipulateRow (
+        
+        $grid->addColumn($wardColumn, 12);
+         
+        $em = $this->getDoctrine()->getManager();        
+         
+        $source->manipulateRow (
             function ($row) use ($em)
             { 
-				$res = "";
-				$em = $this->getDoctrine()->getManager();
-				 
-				$roles_all = $em->getRepository('AcmeHappyBundle:UsersToWards')->findBy(array('userid'=>$row->getField("id")));
-			 
-				if(count($roles_all))
-				{
-					foreach($roles_all as $roles_u)
-					{
-						$res .= $roles_u->getWardid()->getWardname() ." \n";
-					}
-				}
-				
+                $res = "";
+                $em = $this->getDoctrine()->getManager();
+                 
+                $roles_all = $em->getRepository('AcmeHappyBundle:UsersToWards')->findBy(array('userid'=>$row->getField("id")));
+             
+                if(count($roles_all))
+                {
+                    foreach($roles_all as $roles_u)
+                    {
+                        $res .= $roles_u->getWardid()->getWardname() ." \n";
+                    }
+                }
+                
                 $row->setField('lang', $res);
-				 
+                 
                 return $row;
             }
         );
-		
-		$grid->setDefaultOrder('id', 'DESC');
-		
+        
+        $grid->setDefaultOrder('id', 'DESC');
+        
         $grid->setSource($source);
-		
-		$rowAction2 = new RowAction($this->get('translator')->trans('Edycja'), '_admin_edituser', false, '_self');
+        
+        $rowAction2 = new RowAction($this->get('translator')->trans('Edycja'), '_admin_edituser', false, '_self');
         $grid->addRowAction($rowAction2);
         $rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_deleteuser', true, '_self');
         $rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
         $grid->addRowAction($rowAction);
-		
-		return $grid->getGridResponse('AcmeHappyBundle:Secured:users.html.twig');
+        
+        return $grid->getGridResponse('AcmeHappyBundle:Secured:users.html.twig');
     }
-	
-	/**
+    
+    /**
      * @Route( "/newuser",  name="_admin_newuser" )
      * @Template()
      */
     public function newuserAction(Request $request)
     {
-		$entity = new Users();
+        $entity = new Users();
         $form   = $this->createForm(new UsersType('create'), $entity );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager(); 
-			
-			$entity->setRoles("ROLE_USER");
-			$entity->setActive(1);
-			$entity->setSalt(md5(time())); 
-			$entity->setCreated( new \DateTime('now') );  
+            
+            $entity->setRoles("ROLE_USER");
+            $entity->setActive(1);
+            $entity->setSalt(md5(time())); 
+            $entity->setCreated( new \DateTime('now') );  
 
-			$encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
-			$password_set = $encoder->encodePassword($entity->getPass(), $entity->getSalt());
-			$entity->setPassword($password_set);
-			 
+            $encoder = new MessageDigestPasswordEncoder('sha512', true, 10);
+            $password_set = $encoder->encodePassword($entity->getPass(), $entity->getSalt());
+            $entity->setPassword($password_set);
+             
             $em->persist($entity);
             $em->flush();
 
@@ -138,28 +138,28 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	}
-	
-	/** 
+    }
+    
+    /** 
      * @Route( "/edituser/{id}", defaults={ "id"="0" }, name="_admin_edituser" )
      * @Template()
      */
     public function edituserAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-		$entity = $em->getRepository('AcmeHappyBundle:Users')->find($id);
-		$entityUsersToWards = new UsersToWards();
+        $entity = $em->getRepository('AcmeHappyBundle:Users')->find($id);
+        $entityUsersToWards = new UsersToWards();
 
         if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
         }
  
-		$usertoward = $em->getRepository('AcmeHappyBundle:UsersToWards')->findBy(array('userid'=>$id));
-			
-		$usertowardForm = $this->createForm(new UsersToWardsType('create'), $entityUsersToWards );	
+        $usertoward = $em->getRepository('AcmeHappyBundle:UsersToWards')->findBy(array('userid'=>$id));
+            
+        $usertowardForm = $this->createForm(new UsersToWardsType('create'), $entityUsersToWards );    
         $usertowardForm->handleRequest($request);
-			
-		$editForm = $this->createForm(new UsersType('create'), $entity );
+            
+        $editForm = $this->createForm(new UsersType('create'), $entity );
         $editForm->handleRequest($request);
 
         if ($editForm->isValid())
@@ -171,12 +171,12 @@ class SecuredController extends Controller
 
             return $this->redirect($this->generateUrl('_admin_edituser', array('id' => $id)));
         }
-		
-		if ($usertowardForm->isValid())
+        
+        if ($usertowardForm->isValid())
         {  
-			$useren = $em->getRepository('AcmeHappyBundle:Users')->find($id);
-			
-			$entityUsersToWards->setUserid($useren); 
+            $useren = $em->getRepository('AcmeHappyBundle:Users')->find($id);
+            
+            $entityUsersToWards->setUserid($useren); 
             $em->persist($entityUsersToWards);
             $em->flush();
 
@@ -184,141 +184,141 @@ class SecuredController extends Controller
 
             return $this->redirect($this->generateUrl('_admin_edituser', array('id' => $id)));
         }
-		
+        
         return array( 
             'entity'      => $entity,
-			'usertoward' => $usertoward,
-			'usertowardForm' => $usertowardForm->createView(),
+            'usertoward' => $usertoward,
+            'usertowardForm' => $usertowardForm->createView(),
             'form'   => $editForm->createView(),
         );
-	 
-	}
-	
-	/**
+     
+    }
+    
+    /**
      * @Route( "/removeuserfromward/{id}", defaults={ "id"="0" }, name="_admin_removeuserfromward" )
      * @Template()
      */
     public function removeuserfromwardAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getEntityManager();
      
-		$foo = $em->getRepository('AcmeHappyBundle:UsersToWards')->findOneBy( array(  'id' => $id) );
-		 
-		if($foo)
-		{
-			$userid =  $foo->getUserid()->getId();
-			
-			$em->remove($foo);
-			$em->flush();
-			
+        $foo = $em->getRepository('AcmeHappyBundle:UsersToWards')->findOneBy( array(  'id' => $id) );
+         
+        if($foo)
+        {
+            $userid =  $foo->getUserid()->getId();
+            
+            $em->remove($foo);
+            $em->flush();
+            
             $this->get('session')->getFlashBag()->set('success', 'Użytkownik skasowany');
-			return $this->redirect($this->generateUrl('_admin_edituser', array('id' => $userid)));
-		}
-		else
-		{
+            return $this->redirect($this->generateUrl('_admin_edituser', array('id' => $userid)));
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
-			return $this->redirect($this->generateUrl('_admin_users'));
-		} 
-	}
-	
-	/**
+            return $this->redirect($this->generateUrl('_admin_users'));
+        } 
+    }
+    
+    /**
      * @Route( "/deleteuser/{id}", defaults={ "id"="0" }, name="_admin_deleteuser" )
      * @Template()
      */
     public function deleteuserAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
-        $user = $this->getUser();	
-		
-		$user = $em->getRepository('AcmeHappyBundle:Users')->findOneBy( array(  'id' => $id) );
-		 
-		if($user)
-		{
-			$em->remove($user);
-			$em->flush();
-			
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->getUser();    
+        
+        $user = $em->getRepository('AcmeHappyBundle:Users')->findOneBy( array(  'id' => $id) );
+         
+        if($user)
+        {
+            $em->remove($user);
+            $em->flush();
+            
             $this->get('session')->getFlashBag()->set('success', 'Użytkownik skasowany');
-		}
-		else
-		{
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
-		}
-		
-		return $this->redirect($this->generateUrl('_admin_users'));
-	}
-	 
+        }
+        
+        return $this->redirect($this->generateUrl('_admin_users'));
+    }
+     
     /**
      * @Route("/equipments/", name="_admin_equipments")
      * @Template()
      */
     public function equipmentsAction(Request $request)
     { 
-        $em = $this->getDoctrine()->getManager();	 
-		$source = new Entity('AcmeHappyBundle:Equipments');
+        $em = $this->getDoctrine()->getManager();     
+        $source = new Entity('AcmeHappyBundle:Equipments');
  
-		$eq_Date = new TextColumn(array('id' => 'eq_date',  'safe'=>false, 'sortable' => false, 'title' => 'Ostatni przegląd', 'size' => '80','filter' => false));
+        $eq_Date = new TextColumn(array('id' => 'eq_date',  'safe'=>false, 'sortable' => false, 'title' => 'Ostatni przegląd', 'size' => '80','filter' => false));
       
         $grid = $this->get('grid');
-		$grid->addColumn($eq_Date, 12);
-		
-		$source->manipulateRow(
-			function ($row) use ($em)
-			{  
-					 
-				$res = $em->getRepository('AcmeHappyBundle:EquipmentReviews')
-					  ->findOneBy(
-						 array('equipment'=> $row->getField("id")), 
-						 array('reviewdate' => 'DESC')
-					   );
-			   
-				if(isset($res))
-				{
-					$row->setField('eq_date', $rew_date );
-				}
-				else
-				{
-					$row->setField('eq_date', "-");
-				}
+        $grid->addColumn($eq_Date, 12);
+        
+        $source->manipulateRow(
+            function ($row) use ($em)
+            {  
+                     
+                $res = $em->getRepository('AcmeHappyBundle:EquipmentReviews')
+                      ->findOneBy(
+                         array('equipment'=> $row->getField("id")), 
+                         array('reviewdate' => 'DESC')
+                       );
+               
+                if(isset($res))
+                {
+                    $row->setField('eq_date', $rew_date );
+                }
+                else
+                {
+                    $row->setField('eq_date', "-");
+                }
 
-				return $row;
-			}
-		);
+                return $row;
+            }
+        );
 
-        $em = $this->getDoctrine()->getManager();		
+        $em = $this->getDoctrine()->getManager();        
 
-		$rowAction = new RowAction($this->get('translator')->trans('Szczegóły'), '_admin_detailsequipment', false, '_self');
+        $rowAction = new RowAction($this->get('translator')->trans('Szczegóły'), '_admin_detailsequipment', false, '_self');
         $grid->addRowAction($rowAction);
-		$rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipment', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
+        $rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipment', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
         $grid->addRowAction($rowAction);
         $rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_deleteequipment', true, '_self');
         $rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
         $grid->addRowAction($rowAction);
 
-		$grid->setDefaultOrder('title', 'ASC');
+        $grid->setDefaultOrder('title', 'ASC');
 
         $grid->setSource($source);
-		return $grid->getGridResponse('AcmeHappyBundle:Secured:equipments.html.twig');
+        return $grid->getGridResponse('AcmeHappyBundle:Secured:equipments.html.twig');
     }
 
-	/**
+    /**
      * @Route( "/newequipment",  name="_admin_newequipment" )
      * @Template()
      */
     public function newequipmentAction(Request $request)
     {
-		$entity = new Equipments();
+        $entity = new Equipments();
 
-		$arr_utw = $this->getAllWards();  
+        $arr_utw = $this->getAllWards();  
 
-		$form = $this
-				->get('form.factory')
-				->create(new EquipmentsType($arr_utw), $entity);
-	
+        $form = $this
+                ->get('form.factory')
+                ->create(new EquipmentsType($arr_utw), $entity);
+    
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-		
-			$entity->setInserteddate(new \DateTime('now') ); 
+        
+            $entity->setInserteddate(new \DateTime('now') ); 
 
             $em = $this->getDoctrine()->getManager(); 
             $em->persist($entity);
@@ -333,31 +333,31 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	}
-	
-	/**
+    }
+    
+    /**
      * @Route( "/editequipment/{id}", defaults={ "id"="0" }, name="_admin_editequipment")
      * @Template()
      */
     public function editequipmentAction(Request $request, $id)
     { 
-        $em = $this->getDoctrine()->getManager();	
-		$entity = $em->getRepository('AcmeHappyBundle:Equipments')->find($id);
-		
-		if (!$entity) {
+        $em = $this->getDoctrine()->getManager();    
+        $entity = $em->getRepository('AcmeHappyBundle:Equipments')->find($id);
+        
+        if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
         }
 
-		$arr_utw = $this->getAllWards();  
+        $arr_utw = $this->getAllWards();  
 
-		$form = $this
-				->get('form.factory')
-				->create(new EquipmentsType($arr_utw), $entity);
-	  
+        $form = $this
+                ->get('form.factory')
+                ->create(new EquipmentsType($arr_utw), $entity);
+      
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-		 
+         
             $em = $this->getDoctrine()->getManager(); 
             $em->persist($entity);
             $em->flush();
@@ -371,188 +371,188 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	}
+    }
 
-	/**
+    /**
      * @Route( "/deleteequipment/{id}", defaults={ "id"="0" }, name="_admin_deleteequipment" )
      * @Template()
      */
     public function deleteequipmentAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
-        $user = $this->getUser();	
-		
-		$equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->getUser();    
+        
+        $equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
 
-		if($equipment)
-		{
-			try{
-				$em->remove($equipment);
-				$em->flush();
-				
-				$this->get('session')->getFlashBag()->set('success', 'Sprzęt skasowany');
-		 
-			 } catch (\Exception $e) {
-					 
-					$this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
-				} 
-		}
-		else
-		{
+        if($equipment)
+        {
+            try{
+                $em->remove($equipment);
+                $em->flush();
+                
+                $this->get('session')->getFlashBag()->set('success', 'Sprzęt skasowany');
+         
+             } catch (\Exception $e) {
+                     
+                    $this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
+                } 
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Sprzęt nie znaleziony');
-		}
-		
-		return $this->redirect($this->generateUrl('_admin_equipments'));
-	}	  
-	
-	
-	/** 
+        }
+        
+        return $this->redirect($this->generateUrl('_admin_equipments'));
+    }      
+    
+    
+    /** 
      * @Route( "/detailsequipment/{id}", defaults={ "id"="0" }, name="_admin_detailsequipment" )
      * @Template()
      */
     public function detailsequipmentAction( $id)
     {
-		$em = $this->getDoctrine()->getManager();	
-		
-		$equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
-		
-		if (!$equipment) {
+        $em = $this->getDoctrine()->getManager();    
+        
+        $equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
+        
+        if (!$equipment) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
         }
 
-		//Breakdowns
-			
-			$gridBreakdowns = $this->get('grid');
+        //Breakdowns
+            
+            $gridBreakdowns = $this->get('grid');
 
-			$itemsColumn = new TextColumn(array('id' => 'dateOfAccident_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data awarii', 'size' => '150' ));
-			$gridBreakdowns->addColumn($itemsColumn, 2);
+            $itemsColumn = new TextColumn(array('id' => 'dateOfAccident_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data awarii', 'size' => '150' ));
+            $gridBreakdowns->addColumn($itemsColumn, 2);
  
-			$designColumn = new TextColumn(array('id' => 'dateOfDispatch_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data wysyłki', 'size' => '150' ));
-			$gridBreakdowns->addColumn($designColumn, 3);
+            $designColumn = new TextColumn(array('id' => 'dateOfDispatch_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data wysyłki', 'size' => '150' ));
+            $gridBreakdowns->addColumn($designColumn, 3);
 
-			$dataColumn = new TextColumn(array('id' => 'dataRecovery_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data naprawy', 'size' => '150' ));
-			$gridBreakdowns->addColumn($dataColumn, 6);
-			
-			$sourceBreakdowns = new Entity('AcmeHappyBundle:EquipmentBreakdowns');
-			$sourceBreakdowns->manipulateRow(
-				function ($row) use ($id)
-				{
-					//DateTime field - date format
-					if($row->getField("dateOfAccident"))
-					{
-						$form_date = $row->getField("dateOfAccident");
-						if(is_object($form_date))
-						$row->setField('dateOfAccident_str', $form_date->format('d-m-Y'));
-					}
-					
-					if($row->getField("dateOfDispatch"))
-					{
-						$form_date = $row->getField("dateOfDispatch");
-						if(is_object($form_date))
-						$row->setField('dateOfDispatch_str', $form_date->format('d-m-Y'));
-					}
-					
-					if($row->getField("dataRecovery"))
-					{
-						$form_date = $row->getField("dataRecovery");
-						if(is_object($form_date))
-						$row->setField('dataRecovery_str', $form_date->format('d-m-Y'));
-					}
-					
-					if ($id == $row->getField("equipment.id"))
-						return $row;
-					else
-						return null;
-				
-				}
-			);
+            $dataColumn = new TextColumn(array('id' => 'dataRecovery_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data naprawy', 'size' => '150' ));
+            $gridBreakdowns->addColumn($dataColumn, 6);
+            
+            $sourceBreakdowns = new Entity('AcmeHappyBundle:EquipmentBreakdowns');
+            $sourceBreakdowns->manipulateRow(
+                function ($row) use ($id)
+                {
+                    //DateTime field - date format
+                    if($row->getField("dateOfAccident"))
+                    {
+                        $form_date = $row->getField("dateOfAccident");
+                        if(is_object($form_date))
+                        $row->setField('dateOfAccident_str', $form_date->format('d-m-Y'));
+                    }
+                    
+                    if($row->getField("dateOfDispatch"))
+                    {
+                        $form_date = $row->getField("dateOfDispatch");
+                        if(is_object($form_date))
+                        $row->setField('dateOfDispatch_str', $form_date->format('d-m-Y'));
+                    }
+                    
+                    if($row->getField("dataRecovery"))
+                    {
+                        $form_date = $row->getField("dataRecovery");
+                        if(is_object($form_date))
+                        $row->setField('dataRecovery_str', $form_date->format('d-m-Y'));
+                    }
+                    
+                    if ($id == $row->getField("equipment.id"))
+                        return $row;
+                    else
+                        return null;
+                
+                }
+            );
  
-			$em = $this->getDoctrine()->getManager();		
-	 
-			$rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipmentbreakdown', false, '_self' );
-			$gridBreakdowns->addRowAction($rowAction);
-			$rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_removeequipmentbreakdowns', true, '_self');
-			$rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
-			$gridBreakdowns->addRowAction($rowAction);
+            $em = $this->getDoctrine()->getManager();        
+     
+            $rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipmentbreakdown', false, '_self' );
+            $gridBreakdowns->addRowAction($rowAction);
+            $rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_removeequipmentbreakdowns', true, '_self');
+            $rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
+            $gridBreakdowns->addRowAction($rowAction);
 
-			$gridBreakdowns->setDefaultOrder('id', 'ASC');
+            $gridBreakdowns->setDefaultOrder('id', 'ASC');
 
-			$gridBreakdowns->setSource($sourceBreakdowns);
-			$gridBreakdowns->isReadyForRedirect();
-			 
-		//Reviews
-			$sourceReviews = new Entity('AcmeHappyBundle:EquipmentReviews');
-			
-			$sourceReviews->manipulateRow(
-				function ($row) use ($id)
-				{
-					//DateTime field - date format
-					if($row->getField("reviewdate"))
-					{
-						$form_date = $row->getField("reviewdate");
-						if(is_object($form_date))
-						$row->setField('reviewdate_str', $form_date->format('d-m-Y'));
-					}
-					
-					if ($id == $row->getField("equipment.id"))
-						return $row;
-					else
-						return null;
-				
-				}
-			);
-			 
-			$gridReviews = $this->get('grid');
+            $gridBreakdowns->setSource($sourceBreakdowns);
+            $gridBreakdowns->isReadyForRedirect();
+             
+        //Reviews
+            $sourceReviews = new Entity('AcmeHappyBundle:EquipmentReviews');
+            
+            $sourceReviews->manipulateRow(
+                function ($row) use ($id)
+                {
+                    //DateTime field - date format
+                    if($row->getField("reviewdate"))
+                    {
+                        $form_date = $row->getField("reviewdate");
+                        if(is_object($form_date))
+                        $row->setField('reviewdate_str', $form_date->format('d-m-Y'));
+                    }
+                    
+                    if ($id == $row->getField("equipment.id"))
+                        return $row;
+                    else
+                        return null;
+                
+                }
+            );
+             
+            $gridReviews = $this->get('grid');
 
-			$itemsColumn = new TextColumn(array('id' => 'reviewdate_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data przeglądu', 'size' => '150' ));
-			$gridReviews->addColumn($itemsColumn, 3);
-			
-			$em = $this->getDoctrine()->getManager();		
-	 
-			$rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipmentreview', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
-			$gridReviews->addRowAction($rowAction);
-			$rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_removeequipmentreview', true, '_self');
-			$rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
-			$gridReviews->addRowAction($rowAction);
+            $itemsColumn = new TextColumn(array('id' => 'reviewdate_str', 'safe'=>false, 'type'=>'text',  'sortable' => false, 'title' => 'Data przeglądu', 'size' => '150' ));
+            $gridReviews->addColumn($itemsColumn, 3);
+            
+            $em = $this->getDoctrine()->getManager();        
+     
+            $rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editequipmentreview', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
+            $gridReviews->addRowAction($rowAction);
+            $rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_removeequipmentreview', true, '_self');
+            $rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
+            $gridReviews->addRowAction($rowAction);
 
-			$gridReviews->setDefaultOrder('id', 'ASC');
+            $gridReviews->setDefaultOrder('id', 'ASC');
 
-			$gridReviews->setSource($sourceReviews);
-			$gridReviews->isReadyForRedirect();
-		 
-		return $this->render('AcmeHappyBundle:Secured:detailsequipment.html.twig',   
-		  
-			array( 
-				'gridBreakdowns'  => $gridBreakdowns,
-				'gridReviews'	=> $gridReviews ,
-				'id' => $id,
-				'equipment' => $equipment
-			)
-		); 
-	}
-	
-	/**
+            $gridReviews->setSource($sourceReviews);
+            $gridReviews->isReadyForRedirect();
+         
+        return $this->render('AcmeHappyBundle:Secured:detailsequipment.html.twig',   
+          
+            array( 
+                'gridBreakdowns'  => $gridBreakdowns,
+                'gridReviews'    => $gridReviews ,
+                'id' => $id,
+                'equipment' => $equipment
+            )
+        ); 
+    }
+    
+    /**
      * @Route( "/newequipmentreview/{id}", defaults={ "id"="0" },   name="_admin_newequipmentreview" )
      * @Template()
      */
     public function newequipmentreviewAction(Request $request, $id)
     {
-		$em = $this->getDoctrine()->getManager();	
-		
-		$equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id));
-		
-		if (!$equipment) {
+        $em = $this->getDoctrine()->getManager();    
+        
+        $equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id));
+        
+        if (!$equipment) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
-		}
+        }
 
-		$entity = new EquipmentReviews();
+        $entity = new EquipmentReviews();
         $form   = $this->createForm(new EquipmentReviewsType('create'), $entity );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-		
-			$entity->setEquipment( $equipment ); 
-			
+        
+            $entity->setEquipment( $equipment ); 
+            
             $em = $this->getDoctrine()->getManager(); 
             $em->persist($entity);
             $em->flush();
@@ -566,16 +566,16 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	} 
-	
-	/**
+    } 
+    
+    /**
      * @Route( "/editequipmentreview/{id}", defaults={ "id"="0" }, name="_admin_editequipmentreview" )
      * @Template()
      */
     public function editequipmentreviewAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-		$entity = $em->getRepository('AcmeHappyBundle:EquipmentReviews')->find($id);
+        $entity = $em->getRepository('AcmeHappyBundle:EquipmentReviews')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
@@ -587,8 +587,8 @@ class SecuredController extends Controller
 
         if ($editForm->isValid())
         {   
-			$equipmentid =  $entity->getEquipment()->getId();
-			
+            $equipmentid =  $entity->getEquipment()->getId();
+            
             $em->persist($entity);
             $em->flush();
 
@@ -601,57 +601,57 @@ class SecuredController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
         );
-	}
-	
-	/**
+    }
+    
+    /**
      * @Route( "/removeequipmentreview/{id}", defaults={ "id"="0" }, name="_admin_removeequipmentreview" )
      * @Template()
      */
     public function removeequipmentreviewAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getEntityManager();
      
-		$foo = $em->getRepository('AcmeHappyBundle:EquipmentReviews')->findOneBy( array(  'id' => $id) );
+        $foo = $em->getRepository('AcmeHappyBundle:EquipmentReviews')->findOneBy( array(  'id' => $id) );
 
-		if($foo)
-		{
-			$equipmentid =  $foo->getEquipment()->getId();
-			
-			$em->remove($foo);
-			$em->flush();
-			
+        if($foo)
+        {
+            $equipmentid =  $foo->getEquipment()->getId();
+            
+            $em->remove($foo);
+            $em->flush();
+            
             $this->get('session')->getFlashBag()->set('success', 'Przegląd skasowany');
-			return $this->redirect($this->generateUrl('_admin_detailsequipment', array('id' => $equipmentid)));
-		}
-		else
-		{
+            return $this->redirect($this->generateUrl('_admin_detailsequipment', array('id' => $equipmentid)));
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
-			return $this->redirect($this->generateUrl('_admin_equipments'));
-		} 
-	}
-	
-	/**
+            return $this->redirect($this->generateUrl('_admin_equipments'));
+        } 
+    }
+    
+    /**
      * @Route( "/newequipmentbreakdown/{id}", defaults={ "id"="0" },   name="_admin_newequipmentbreakdown" )
      * @Template()
      */
     public function newequipmentbreakdownAction(Request $request, $id)
     {
-		$em = $this->getDoctrine()->getManager();	
-		
-		$equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
-		
-		if (!$equipment) {
+        $em = $this->getDoctrine()->getManager();    
+        
+        $equipment = $em->getRepository('AcmeHappyBundle:Equipments')->findOneBy( array(  'id' => $id) );
+        
+        if (!$equipment) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
         }
 
-		$entity = new EquipmentBreakdowns();
+        $entity = new EquipmentBreakdowns();
         $form   = $this->createForm(new EquipmentBreakdownsType('create'), $entity );
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-		
-			$entity->setEquipment( $equipment ); 
-			
+        
+            $entity->setEquipment( $equipment ); 
+            
             $em = $this->getDoctrine()->getManager(); 
             $em->persist($entity);
             $em->flush();
@@ -665,16 +665,16 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	}
-	
-	/**
+    }
+    
+    /**
      * @Route( "/editequipmentbreakdown/{id}", defaults={ "id"="0" }, name="_admin_editequipmentbreakdown" )
      * @Template()
      */
     public function editequipmentbreakdownAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-		$entity = $em->getRepository('AcmeHappyBundle:EquipmentBreakdowns')->find($id);
+        $entity = $em->getRepository('AcmeHappyBundle:EquipmentBreakdowns')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
@@ -686,8 +686,8 @@ class SecuredController extends Controller
 
         if ($editForm->isValid())
         {   
-			$equipmentid =  $entity->getEquipment()->getId();
-			
+            $equipmentid =  $entity->getEquipment()->getId();
+            
             $em->persist($entity);
             $em->flush();
 
@@ -700,69 +700,69 @@ class SecuredController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
         );
-	}
-	
-	/**
+    }
+    
+    /**
      * @Route( "/removeequipmentbreakdowns/{id}", defaults={ "id"="0" }, name="_admin_removeequipmentbreakdowns" )
      * @Template()
      */
     public function removeequipmentbreakdownsAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getEntityManager();
      
-		$foo = $em->getRepository('AcmeHappyBundle:EquipmentBreakdowns')->findOneBy( array(  'id' => $id) );
-		
-		if($foo)
-		{
-			$equipmentid =  $foo->getEquipment()->getId();
-			
-			$em->remove($foo);
-			$em->flush();
-			
+        $foo = $em->getRepository('AcmeHappyBundle:EquipmentBreakdowns')->findOneBy( array(  'id' => $id) );
+        
+        if($foo)
+        {
+            $equipmentid =  $foo->getEquipment()->getId();
+            
+            $em->remove($foo);
+            $em->flush();
+            
             $this->get('session')->getFlashBag()->set('success', 'Awaria skasowana');
-			return $this->redirect($this->generateUrl('_admin_detailsequipment', array('id' => $equipmentid)));
-		}
-		else
-		{
+            return $this->redirect($this->generateUrl('_admin_detailsequipment', array('id' => $equipmentid)));
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Błąd podczas operacji');
-			return $this->redirect($this->generateUrl('_admin_equipments'));
-		} 
-	}
-	
+            return $this->redirect($this->generateUrl('_admin_equipments'));
+        } 
+    }
+    
     /**
      * @Route("/wards/", name="_admin_wards")
      * @Template()
      */
     public function wardsAction(Request $request)
     { 
-        $em = $this->getDoctrine()->getManager();	
+        $em = $this->getDoctrine()->getManager();    
   
         $source = new Entity('AcmeHappyBundle:Wards');
 
-		$grid = $this->get('grid');
-		 
-        $em = $this->getDoctrine()->getManager();		
+        $grid = $this->get('grid');
+         
+        $em = $this->getDoctrine()->getManager();        
  
-		$rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editward', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
-		$grid->addRowAction($rowAction);
-		$rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_deleteward', true, '_self');
-		$rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
-		$grid->addRowAction($rowAction);
-		
-		$grid->setDefaultOrder('wardname', 'ASC');
-		
+        $rowAction = new RowAction($this->get('translator')->trans('Edycja'), '_admin_editward', false, '_self'/*, array('type'=>'pencil fa fa-pencil fa-lg')*/);
+        $grid->addRowAction($rowAction);
+        $rowAction = new RowAction($this->get('translator')->trans('Skasuj'), '_admin_deleteward', true, '_self');
+        $rowAction->setConfirmMessage($this->get('translator')->trans('Czy na pewno chcesz skasować ?'));
+        $grid->addRowAction($rowAction);
+        
+        $grid->setDefaultOrder('wardname', 'ASC');
+        
         $grid->setSource($source);
-		return $grid->getGridResponse('AcmeHappyBundle:Secured:wards.html.twig');
+        return $grid->getGridResponse('AcmeHappyBundle:Secured:wards.html.twig');
     }
-	
-	/**
+    
+    /**
      * @Route( "/editward/{id}", defaults={ "id"="0" }, name="_admin_editward" )
      * @Template()
      */
     public function editwardAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-		$entity = $em->getRepository('AcmeHappyBundle:Wards')->find($id);
+        $entity = $em->getRepository('AcmeHappyBundle:Wards')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException($this->get('translator')->trans('Nie znaleziono'));
@@ -786,15 +786,15 @@ class SecuredController extends Controller
             'entity'      => $entity,
             'form'   => $editForm->createView(),
         );
-	}
-	
-	/**
+    }
+    
+    /**
      * @Route( "/newward",  name="_admin_newward" )
      * @Template()
      */
     public function newwardAction(Request $request)
     {
-		$entity = new Wards();
+        $entity = new Wards();
         $form   = $this->createForm(new WardsType('create'), $entity );
         $form->handleRequest($request);
 
@@ -812,40 +812,40 @@ class SecuredController extends Controller
             'entity' => $entity,
             'form'   => $form->createView(),
         );
-	}
+    }
 
-	/**
+    /**
      * @Route( "/deleteward/{id}", defaults={ "id"="0" }, name="_admin_deleteward" )
      * @Template()
      */
     public function deletewardAction($id = 0)
     {
-		$em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getEntityManager();
  
-		$ward = $em->getRepository('AcmeHappyBundle:Wards')->findOneBy( array(  'id' => $id) );
+        $ward = $em->getRepository('AcmeHappyBundle:Wards')->findOneBy( array(  'id' => $id) );
 
-		if($ward)
-		{
-			try{
-				$em->remove($ward);
-				$em->flush();
-				
-				$this->get('session')->getFlashBag()->set('success', 'Oddział skasowany');
-		 
-			 } catch (\Exception $e) {
-					 
-					$this->get('session')->getFlashBag()->set('error', 'Oddział nie jest pusty');
-				} 
-		}
-		else
-		{
+        if($ward)
+        {
+            try{
+                $em->remove($ward);
+                $em->flush();
+                
+                $this->get('session')->getFlashBag()->set('success', 'Oddział skasowany');
+         
+             } catch (\Exception $e) {
+                     
+                    $this->get('session')->getFlashBag()->set('error', 'Oddział nie jest pusty');
+                } 
+        }
+        else
+        {
             $this->get('session')->getFlashBag()->set('error', 'Oddział nie istanieje');
-		}
-		
-		return $this->redirect($this->generateUrl('_admin_wards'));
-	}
-	 
-	   
+        }
+        
+        return $this->redirect($this->generateUrl('_admin_wards'));
+    }
+     
+       
     /**
      * @Route("/login", name="_demo_login")
      * @Template()
@@ -863,7 +863,7 @@ class SecuredController extends Controller
             'error'         => $error,
         );
     }
-
+    
     /**
      * @Route("/login_check", name="_security_check")
      */
@@ -887,21 +887,21 @@ class SecuredController extends Controller
     public function helloadminAction()
     {
         return array('name' => 'Hello');
-    }	
-	
+    }
+
     public function getAllWards()
     {
         $em = $this->getDoctrine()->getManager();
-		
-        $user = $this->getUser();	 
-		$usertoward = $em->getRepository('AcmeHappyBundle:Wards')->findAll();
-		$arr_utw = array();
-		foreach($usertoward as $utw)
-		{
-			$arr_utw[] = $utw->getId();
-		}
-		
-		return $arr_utw;
+
+        $user = $this->getUser();     
+        $usertoward = $em->getRepository('AcmeHappyBundle:Wards')->findAll();
+        $arr_utw = array();
+        foreach($usertoward as $utw)
+        {
+            $arr_utw[] = $utw->getId();
+        }
+        
+        return $arr_utw;
     } 
-		
+    
 }
